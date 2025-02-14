@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="login-container">
+        <input type="text" placeholder="Enter Email" required id="email">
+        <input type="password" placeholder="Enter Password" required id="password">
+        <button onclick = "whenclicked()">Log In</button>
+    </div>
+</body>
+
+<script>
+    function whenclicked(){ 
+        var email = document.getElementById("email").value
+        var password = document.getElementById("password").value;
+        if (password == "patotoya" && email == "allenopaw"){
+         window.alert("login success");
+        }
+        
+        else {
+            window.alert("mali");
+        }
+        
+    }
+</script>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <h3>Rock Paper Scissors</h1>
+    <h3>Player 1</h2>
+    <div>
+        <img id="selection" src="ew.jpg">
+    </div>
+    <h3>vs</h3><hr>
+    <h3>Computer</h3>
+    <img id ="imgc"  src="ew.jpg"   alt="" >    
+   
+    <select onchange="XYZ()" id="user">
+        <option value="">Pick your hand</option>
+        <option value="0">Rock</option>
+        <option value="1">Paper</option>
+        <option value="2">Scissors</option>
+    </select>
+    <button onclick="go()">Go!</button>
+    <h3><p id="result"></p></h3>
+    <script>
+        function go() {
+            var user = parseInt(document.getElementById('user').value);
+            var computer = Math.floor(Math.random() * 3);
+            var result = '';
+
+            if (user === computer) {
+                result = 'It\'s a tie!';
+            } else if (user === 0 && computer === 2) {
+                result = 'You win! Rock beats Scissors.';
+            } else if (user === 1 && computer === 0) {
+                result = 'You win! Paper beats Rock.';
+            } else if (user === 2 && computer === 1) {
+                result = 'You win! Scissors beats Paper.';
+            } else {
+                result = 'You lose!';
+            }
+            document.getElementById('result').innerText = 'Computer chose: ' + choiceToString(computer) + '. ' + result;
+           
+            const img = document.getElementById('imgc').src;
+            if (computer === 0){
+                imgc.src = 'rock.png';
+            }
+            
+            else if (computer === 1){
+                imgc.src = 'Paper.png';
+            }
+
+            else if (computer === 2){
+                imgc.src = 'scissors.png';
+            }
+        }
+
+        function choiceToString(choice) {
+            if (choice === 0) return 'Rock';
+            if (choice === 1) return 'Paper';
+            if (choice === 2) return 'Scissors';
+        }
+
+        function XYZ() {
+            var select = document.getElementById("user");
+            const img = document.getElementById('selection');
+            var choice = parseInt(select.value);
+            if (choice === 0) {
+                img.src = 'rock.png';
+            } else if (choice === 1) {
+                img.src = 'paper.png';
+            } else if (choice === 2) {
+                img.src = 'scissors.png';
+            } else {
+                img.src = 'ew.jpg';
+            }
+        }
+    </script>
+    <style>
+        img {
+            max-width: 300px;
+            display: block;
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100px;
+            height: 50px;
+            color: blue;
+        }
+
+        button:hover {
+            transform: translateY(-5px);
+        }
+
+        body {
+            text-align: center;
+        }
+
+        select {
+            width: 250px;
+            height: 50px;
+        } 
+
+        h3{
+            font-size: 50px;
+            font-weight: 700;
+        }
+    </style>
+</body>
+</html>

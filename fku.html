@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alkalbo</title>
+</head>
+<body id = 'pakyo'>
+    <h1> pakyo nimo allen</h1>
+    <p>Enter a number between 1 to 10</p>
+    <div id="inputContainer">
+        <input type="text" maxlength="2" id="box1"> 
+        <input type="text" maxlength="2" id="box2"> 
+        <input type="text" maxlength="2" id="box3"> 
+        <input type="text" maxlength="2" id="box4"> 
+        <input type="text" maxlength="2" id="box5"> 
+        <input type="text" maxlength="2" id="box6"> 
+    </div>
+    <button onclick="CheckGuess()">Submit Guess</button>
+    <p id="result"></p>
+
+</body>
+
+<style>
+    body {
+        font-family: arial, Arial, Helvetica, sans-serif;
+        text-align: center;
+        margin: 50px;
+    }
+
+    #inputContainer {
+        margin: 20px 0;
+    }
+
+    input {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        text-align: center;
+        margin: 5px;
+    }
+
+    button {
+        margin-top: 20px;
+        font-size: 18px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    const target = Array.from({ length: 6 }, () => Math.floor(Math.random() * 10) + 1);
+
+    function CheckGuess() {
+        const body = document.getElementById('pakyo');
+        const guess = [
+            parseInt(document.getElementById('box1').value, 10),
+            parseInt(document.getElementById('box2').value, 10),
+            parseInt(document.getElementById('box3').value, 10),
+            parseInt(document.getElementById('box4').value, 10),
+            parseInt(document.getElementById('box5').value, 10),
+            parseInt(document.getElementById('box6').value, 10)
+        ];
+
+        const result = document.getElementById('result');
+
+        if (guess.some(num => isNaN(num) || num < 1 || num > 10)) {
+            result.textContent = "Please enter numbers between 1 and 10 allen opaw";
+            result.style.color = "red";
+            return;
+        }
+
+        if (JSON.stringify(guess) === JSON.stringify(target)) {
+            result.textContent = `Correct Pakyo nimo len`;
+            result.style.color = "green";
+            document.querySelectorAll('input').forEach(input => input.disabled = true);
+            body.style.backgroundColor = "purple";
+        } else {
+            result.textContent = `mali bobo ang number sa lotto kay ${target.join(", ")}`;
+            result.style.color = "blue";
+            body.style.backgroundColor = "pink";
+        }
+    }
+</script>
+</html>

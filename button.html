@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            height: 100vh; 
+            position: relative;
+        }
+
+        h1{
+            position: absolute;
+            margin: 0;
+        }
+        button {
+            margin: 0; 
+            padding: 20px; 
+            position: absolute; 
+            background-color: palevioletred;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 id ='sk' >Allen opaw kasper</h1>
+        <button onclick='xyz()' id='Noo'>No</button>
+    </div>
+
+    <script>
+        function xyz() {
+            const button = document.getElementById('Noo');
+            const h1 = document.getElementById('sk');
+            const x = Math.random() * (window.innerWidth - button.offsetWidth);
+            const y = Math.random() * (window.innerHeight - button.offsetHeight);
+            
+            const w = Math.random() * (window.innerWidth - h1.offsetWidth);
+            const z = Math.random() * (window.innerHeight - h1.offsetHeight);
+            
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+
+            h1.style.left = `${w}px`;
+            h1.style.top = `${z}px`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eks oh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 5px;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 20px;
+        }
+        #status {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Allen kalbo</h1>
+        <div id="board" class="board"></div>
+        <button id="restart">Restart</button>
+        <div id="status">Current Player: X</div>
+    </div>
+    <script>
+        const board = document.getElementById('board');
+        const statusDiv = document.getElementById('status');
+        const restartButton = document.getElementById('restart');
+        let boardState = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameActive = true;
+
+        function createBoard() {
+            boardState.fill('');
+            currentPlayer = 'X';
+            gameActive = true;
+            statusDiv.innerText = `Current Player: ${currentPlayer}`;
+            board.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.setAttribute('data-cell-index', i);
+                cell.addEventListener('click', handleCellClick);
+                board.appendChild(cell);
+            }
+        }
+
+        function handleCellClick(event) {
+            const cell = event.target;
+            const cellIndex = cell.getAttribute('data-cell-index');
+            if (boardState[cellIndex] || !gameActive) return;
+
+            boardState[cellIndex] = currentPlayer;
+            cell.innerText = currentPlayer;
+            checkResult();
+        }
+
+        function checkResult() {
+            const winningConditions = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+            for (const [a, b, c] of winningConditions) {
+                if (boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c]) {
+                    statusDiv.innerText = `Player ${currentPlayer} wins!`;
+                    gameActive = false;
+                    return;
+                }
+            }
+            if (!boardState.includes('')) {
+                statusDiv.innerText = 'Game ended in a draw!';
+                gameActive = false;
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                statusDiv.innerText = `Current Player: ${currentPlayer}`;
+            }
+        }
+
+        restartButton.addEventListener('click', createBoard);
+        createBoard();
+    </script>
+</body>
+</html>
